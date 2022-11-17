@@ -8,6 +8,57 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
         $(function () {
+        
+        console.log('init');
+                    
+                    
+	  const iOS_1to12 = /iPad|iPhone|iPod/.test(navigator.platform);
+  const iOS13_iPad = (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const iOS1to12quirk = function() {
+    var audio = new Audio(); // temporary Audio object
+    audio.volume = 0.5; // has no effect on iOS <= 12
+    return audio.volume === 1;
+  };
+  const isIOS = !window.MSStream && (iOS_1to12 || iOS13_iPad || iOS1to12quirk());
+  
+		       //if (isIOS) document.getElementById('webkit_play').style.display = "flex";
+		  var elem = document.documentElement;
+		  //var vid = document.getElementById("videoa");
+		  /* View in fullscreen */
+		  function start() {
+		  	//vid.play();
+			this.innerText = initAudioContext();
+			this.stop();
+			this.play();
+		  }
+		  function openFullscreen() {
+		    if (elem.requestFullscreen) {
+		      elem.requestFullscreen();
+		    } else if (elem.webkitRequestFullscreen) { /* Safari */
+		      elem.webkitRequestFullscreen();
+		    } else if (elem.msRequestFullscreen) { /* IE11 */
+		      elem.msRequestFullscreen();
+		    }
+		  }
+		 
+		  /* Close fullscreen */
+		  function closeFullscreen() {
+		    if (document.exitFullscreen) {
+		      document.exitFullscreen();
+		    } else if (document.webkitExitFullscreen) { /* Safari */
+		      document.webkitExitFullscreen();
+		    } else if (document.msExitFullscreen) { /* IE11 */
+		      document.msExitFullscreen();
+		    }
+		  }
+
+		   $("body").click(function(event){
+		    //start();
+		    console.log(event);
+		    
+		    openFullscreen();
+		  });
+		  
             const socket = io();
 
             let deviceNr = window.location.pathname.substr(1);

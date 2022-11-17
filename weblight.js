@@ -32,7 +32,7 @@ const srv = artnet.listen(config.artnet.port, function (msg, peer) {
     // console.log("Physical: " + msg.physical);
     // console.log("Universe: " + msg.universe);
     // console.log("Length: " + msg.length);
-    // console.log("Data: " + msg.data);
+    console.log("Data: " + msg.data);
     // console.log("-----------------");
 
     if (msg.universe !== config.artnet.universe) {
