@@ -1,8 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="EN" lang="EN">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<meta name="apple-mobile-web-app-capable" content="yes">-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
     <title>Artnet HeadLighter</title>
 
     <link href="./css/style.css" rel="stylesheet">
@@ -17,7 +17,7 @@
 
 			}
 			body {
-			font-family: 'consolasregular';
+				font-family: 'consolasregular';
 			}
 
 	    </style>
@@ -41,14 +41,8 @@
   
 		       //if (isIOS) document.getElementById('webkit_play').style.display = "flex";
 		  var elem = document.documentElement;
-		  //var vid = document.getElementById("videoa");
+
 		  /* View in fullscreen */
-		  function start() {
-		  	//vid.play();
-			this.innerText = initAudioContext();
-			this.stop();
-			this.play();
-		  }
 		  function openFullscreen() {
 		    if (elem.requestFullscreen) {
 		      elem.requestFullscreen();
