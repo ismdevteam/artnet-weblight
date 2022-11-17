@@ -57,6 +57,13 @@ const srv = artnet.listen(config.artnet.port, function (msg, peer) {
         });
 });
 
+app.get('/fonts/consolas-webfont.woff', function (req, res) {
+    res.sendFile(__dirname + '/js/jquery.js')
+});
+
+app.get('/fonts/consolas-webfont.woff2', function (req, res) {
+    res.sendFile(__dirname + '/js/jquery.js')
+});
 
 app.get('/js/jquery.js', function (req, res) {
     res.sendFile(__dirname + '/js/jquery.js')

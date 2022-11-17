@@ -4,6 +4,22 @@
     <title>Artnet Weblight</title>
 
     <link href="./css/style.css" rel="stylesheet">
+    
+    	    <style type="text/css">
+	    		@font-face {
+			    font-family: 'consolasregular';
+			    src: url('consolas-webfont.woff2') format('woff2'),
+				 url('consolas-webfont.woff') format('woff');
+			    font-weight: normal;
+			    font-style: normal;
+
+			}
+			body {
+			font-family: 'consolasregular';
+			}
+
+	    </style>
+	    
     <script src="/js/jquery.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script>
@@ -66,10 +82,34 @@
             const deviceId = "dev" + deviceNr;
 
             const print = function (input) {
-                return "Device " + deviceNr + " | Red: " + input.r + " Green: " + input.g + " Blue: " + input.b + " Alpha " + input.a +
-                    " Border: " + input.border + " Blur: " + input.blur + " Image: " + input.image;
+                return "Device " + deviceNr + "| Alpha " + input.a + " Red: " + input.r + " Green: " + input.g + " Blue: " + input.b + 
+                	//" Border: " + input.border + " Blur: " + input.blur + 
+	               	" Subtitles: " + input.text + 
+                	" Layer1: " + input.layer1_image + " Layer1 opacity: " + input.layer1_opacity +
+                	" Layer2: " + input.layer2_image + " Layer2 opacity: " + input.layer2_opacity;
             };
-
+            
+                        socket.on('imga', function (msg) {
+            
+            console.log('imga:', msg);
+                if (msg.layer1_image !== "images/none") {
+                    let imgA = document.createElement("IMG");
+                    imgA.src = msg.layer1_image;
+                    $('#layer1').css('background-image', 'url(' + imgA.src + ')');
+                } else {
+		    $('#layer1').css('background-image', '');      
+                }
+            });
+            socket.on('imgb', function (msg) {
+                 if (msg.layer2_image !== "images/none") {
+                    let imgB = document.createElement("IMG");
+                    imgB.src = msg.layer2_image;
+                    $('#layer2').css('background-image', 'url(' + imgB.src + ')');
+                } else {
+		    $('#layer2').css('background-image', '');      
+                }
+            });
+/*
             socket.on(deviceId, function (msg) {
                 if (window.location.search.substr(1) === 'debug') {
                     $('#debug').text(print(msg));
@@ -88,16 +128,60 @@
                 }
 
             });
+            */
+               socket.on(deviceId, function (msg) {
+
+                if (window.location.search.substr(1) === 'debug') {
+		        $('#debug').text(print(msg));
+		        $('#debug').css('display', 'inline');
+      		        $('#debugpanel').css('display', 'inline');
+		}
+
+                $('html').css('background-color', 'rgba(' + '0' + ', ' + '0' + ', ' + '0' + ', ' + '1' + ')');
+                $('body').css('background-color', 'rgba(' + msg.r + ', ' + msg.g + ', ' + msg.b + ', ' + msg.a + ')');
+                const screenSizeMax = window.innerWidth < window.innerHeight ? window.innerWidth : window.innerHeight;
+                                
+                if (msg.text !== "none") {       
+                    $("#text").text(msg.text);
+                    $("#text").css('color', 'rgba(' + msg.subtitles_r + ', ' + msg.subtitles_g + ', ' + msg.subtitles_b + ', ' + msg.subtitles_a + ')');
+                    //$('#subtitles').css('scale', msg.subtitles_zoom);
+                    $('#text').css('transform', 'scale(' + msg.subtitles_zoom + ')rotate(' + msg.subtitles_rotate + 'deg)');
+                    //$('#text').css('transform', 'rotate(' + msg.subtitles_rotate + 'deg)');
+                    console.log("zoom: " + msg.subtitles_zoom);
+                } else {
+                    $("#text").text("");                    
+                }
+                
+                $('#layer1').css('opacity', (msg.layer1_opacity * 100).toFixed(0) + '%');
+                //$('#layer1').css('scale', msg.layer1_zoom);
+                $('#layer1').css('transform', 'scale(' + msg.layer1_zoom + ')rotate(' + msg.layer1_rotate + 'deg)');
+                $('#layer2').css('opacity', (msg.layer2_opacity * 100).toFixed(0) + '%');
+                $('#layer2').css('scale', msg.layer2_zoom);
+                $('#layer2').css('transform', 'scale(' + msg.layer2_zoom + ')rotate(' + msg.layer2_rotate + 'deg)');
+            });
         });
     </script>
 </head>
-<body>
+<body ontouchstart="openFullscreen()">
 
-<div>
-    <span id="debug"></span>
+<div id="panel">
+	<div id="debugpanel">
+	      <span id="debug"></span>
+	      <span id="index"></span>
+	      <span id="device"></span>
+	      <span id="alpha"></span>
+	      <span id="red"></span>
+	      <span id="green"></span>
+	      <span id="blue"></span>
+	      <span id="image"></span>
+	</div>
+	<div id="subtitles"><h1 id="text"></h1></div>
+	<div id="layer1">
+		<!-- <video width="320" height="240" loop autoplay muted><source src="images/pearl.mp4" type="video/mp4"></video> -->
+	</div>
+	<div id="layer2"></div>
 </div>
-
-<!--<div id="circlebox"></div>-->
+	<!--<div id="circlebox"></div>-->
 
 </body>
 </html>

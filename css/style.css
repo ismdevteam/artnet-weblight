@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'consolasregular';
+    src: url('../fonts/consolas-webfont.woff2') format('woff2'),
+	 url('../fonts/consolas-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
 html {
     background-color: black;
 }
@@ -12,6 +20,7 @@ body {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
+    font-family: 'consolasregular';
 }
 
 #debug {
