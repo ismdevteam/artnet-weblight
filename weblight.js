@@ -461,6 +461,12 @@ function updateClient(deviceId) {
     const deviceNr = deviceId;
     
     const titlesSelector = (buffer[deviceNr + 6] / 2).toFixed(0);
+    
+    
+    const imageNumber = (buffer[deviceNr + 4] / 2).toFixed(0);
+    let imagePath = imageFiles[parseInt(imageNumber) - 1]; //TODO improve via name matching
+    if (!imagePath) imagePath = "none";
+
 
     io.sockets.emit('dev' + deviceId, {
     	index: titlesSelector,
@@ -468,6 +474,7 @@ function updateClient(deviceId) {
         r: buffer[deviceNr + 1],
         g: buffer[deviceNr + 2],
         b: buffer[deviceNr + 3],
+        body_image_opacity: (buffer[deviceNr + 5] / 255).toFixed(3),
 	panel_opacity: (buffer[deviceNr + 10] / 255).toFixed(3), 
 	text: textByLine[titlesSelector],
 	subtitles_a: (buffer[deviceNr + 10] / 255).toFixed(3),
@@ -484,6 +491,7 @@ function updateClient(deviceId) {
 	layer2_opacity: (buffer[deviceNr + 66] / 255).toFixed(3),
 	layer2_rotate: (buffer[deviceNr + 67] * 1.41176470588 + 179).toFixed(0),
         layer2_zoom: (buffer[deviceNr + 68] / 255 * 2).toFixed(3),
+        image: imagePath
     });
 }
 

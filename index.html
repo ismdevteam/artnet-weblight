@@ -93,7 +93,7 @@
             };
             
             socket.on('imga', function (msg) {            
-            console.log('imga:', msg);
+            console.log('imga msg:', msg);
                 if (msg.layer1_image !== "images/none") {
                     let imgA = document.createElement("IMG");
                     imgA.src = msg.layer1_image;
@@ -125,6 +125,13 @@
                 $('html').css('background-color', 'rgba(' + '0' + ', ' + '0' + ', ' + '0' + ', ' + '1' + ')');
                 $('body').css('background-color', 'rgba(' + msg.r + ', ' + msg.g + ', ' + msg.b + ', ' + msg.a + ')');
                 const screenSizeMax = window.innerWidth < window.innerHeight ? window.innerWidth : window.innerHeight;
+                
+                
+                if (msg.image !== "none") {
+                    $('body').css('background-image', 'url(/' + msg.image + ')');
+                } else {
+                    $('body').css('background-image', '');
+                }
                                 
                 if (msg.text !== "none") {       
                     $("#text").text(msg.text);
