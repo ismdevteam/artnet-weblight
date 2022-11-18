@@ -10,7 +10,7 @@ const io = require('socket.io')(http);
 const glob = require("glob");
 
 //const fs = require('fs');
-//const path = require('path');
+const path = require('path');
 
 
 const config = {};
@@ -461,7 +461,7 @@ function updateClient(deviceId) {
         g: buffer[deviceNr + 2],
         b: buffer[deviceNr + 3],
 	panel_opacity: (buffer[deviceNr + 10] / 255).toFixed(3), 
-	//text: textByLine[titlesSelector],
+	text: textByLine[titlesSelector],
 	subtitles_a: (buffer[deviceNr + 10] / 255).toFixed(3),
         subtitles_r: buffer[deviceNr + 7],
         subtitles_g: buffer[deviceNr + 8],

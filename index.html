@@ -85,8 +85,7 @@
                 	" Layer2: " + input.layer2_image + " Layer2 opacity: " + input.layer2_opacity;
             };
             
-                        socket.on('imga', function (msg) {
-            
+            socket.on('imga', function (msg) {            
             console.log('imga:', msg);
                 if (msg.layer1_image !== "images/none") {
                     let imgA = document.createElement("IMG");
@@ -105,28 +104,8 @@
 		    $('#layer2').css('background-image', '');      
                 }
             });
-/*
-            socket.on(deviceId, function (msg) {
-                if (window.location.search.substr(1) === 'debug') {
-                    $('#debug').text(print(msg));
-                    $('#debug').css('display', 'inline');
-                }
-
-                $('body').css('background-color', 'rgba(' + msg.r + ', ' + msg.g + ', ' + msg.b + ', ' + msg.a + ')');
-
-                const screenSizeMax = window.innerWidth < window.innerHeight ? window.innerWidth : window.innerHeight;
-                $('body').css('box-shadow', '0px 0px ' + (msg.blur / 255 * screenSizeMax / 4) + 'px ' + (msg.border / 255 * screenSizeMax / 2 + 1) + 'px #000000 inset');
-
-                if (msg.image !== "none") {
-                    $('body').css('background-image', 'url(/' + msg.image + ')');
-                } else {
-                    $('body').css('background-image', '');
-                }
-
-            });
-            */
                socket.on(deviceId, function (msg) {
-
+		console.log(msg);
                 if (window.location.search.substr(1) === 'debug') {
 		        $('#debug').text(print(msg));
 		        $('#debug').css('display', 'inline');
@@ -139,6 +118,7 @@
                                 
                 if (msg.text !== "none") {       
                     $("#text").text(msg.text);
+                    $("#text").css('font-size', '100px');
                     $("#text").css('color', 'rgba(' + msg.subtitles_r + ', ' + msg.subtitles_g + ', ' + msg.subtitles_b + ', ' + msg.subtitles_a + ')');
                     //$('#subtitles').css('scale', msg.subtitles_zoom);
                     $('#text').css('transform', 'scale(' + msg.subtitles_zoom + ')rotate(' + msg.subtitles_rotate + 'deg)');
@@ -173,6 +153,7 @@
 	</div>
 	<div id="subtitles"><h1 id="text"></h1></div>
 	<div id="layer1">
+		<img id="layer1img" src="images/0001.png">
 		<!-- <video width="320" height="240" loop autoplay muted><source src="images/pearl.mp4" type="video/mp4"></video> -->
 	</div>
 	<div id="layer2"></div>
