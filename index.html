@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="EN" lang="EN" class="position-static">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="EN" lang="EN">
 <head>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable = no">
@@ -153,10 +153,10 @@
                 
                 $('#layer1').css('opacity', (msg.layer1_opacity * 100).toFixed(0) + '%');
                 //$('#layer1').css('scale', msg.layer1_zoom);
-                $('#layer1').css('transform', 'scale(' + msg.layer1_zoom + ')rotate(' + msg.layer1_rotate + 'deg)');
+                $('#layer1').css('transform', 'scale(' + msg.layer1_zoom + ')rotate(' + msg.layer1_rotate + 'deg)translate(0, -100%)');
                 $('#layer2').css('opacity', (msg.layer2_opacity * 100).toFixed(0) + '%');
                 $('#layer2').css('scale', msg.layer2_zoom);
-                $('#layer2').css('transform', 'scale(' + msg.layer2_zoom + ')rotate(' + msg.layer2_rotate + 'deg)');
+                $('#layer2').css('transform', 'scale(' + msg.layer2_zoom + ')rotate(' + msg.layer2_rotate + 'deg)translate(0, -100%)');
             });
         });
     </script>
@@ -177,11 +177,11 @@
 		      <span id="image"></span>
 		</div>
 		<div id="subtitles" class="w-100 h-100 d-flex flex-column justify-content-center align-items-center"><div id="text" class="" style="font-size: 9rem;"></div></div>
-		<div id="layer1" class="w-100 h-100 d-flex flex-column justify-content-center align-items-center">
+		<div id="layer1" class="w-100 h-100 d-flex flex-column justify-content-center align-items-center m-0 p-0 position-absolute" style="background-color:transparent; background-repeat: no-repeat;background-position: center center;background-size: contain;">
 			<!-- <video width="320" height="240" loop autoplay muted><source src="images/pearl.mp4" type="video/mp4"></video> -->
-			<img id="image1" src="image/none" class="img-responsive rounded-3" style="width: 100%; height: 100%;">
+			<!--<img id="image1" src="http://192.168.1.67:2999/lib/artnet-weblight-custom/images/none" class="img-responsive rounded-3" style="width: 100%; height: 100%;">-->
 		</div>
-		<div id="layer2"></div>
+		<div id="layer2" class="w-100 h-100 d-flex flex-column justify-content-center align-items-center m-0 p-0 position-absolute" style="background-color:transparent; background-repeat: no-repeat;background-position: center center;background-size: contain;"></div>
 	</div>
 	<!--<div id="circlebox"></div>-->
 
