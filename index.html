@@ -31,10 +31,11 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
         $(function () {
-                    var host = window.location.protocol + "//" + window.location.host;
                     
-                         console.log('init at:' + host);
-                    
+                    var localIPv4 = window.location.protocol + "//" + window.location.hostname;
+                    var staticLocalStorageURL = localIPv4 + ":2999" + "/lib/artnet-weblight-custom/";
+                    console.log('init at:' + localIPv4);
+                    console.log('image url:' + staticLocalStorageURL);
                     
 	  const iOS_1to12 = /iPad|iPhone|iPod/.test(navigator.platform);
   const iOS13_iPad = (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
@@ -98,7 +99,7 @@
                 if (msg.layer1_image !== "images/none") {
                     let imgA = document.createElement("IMG");
                     imgA.src = msg.layer1_image;
-                    $('#layer1').css('background-image', 'url(' + imgA.src + ')');
+                    $('#layer1').css('background-image', 'url('  + staticLocalStorageURL + imgA.src + ')');
                     //$('body').css('background-image', 'url(/ + msg.layer1_image+ ')');
                 } else {
 		    $('#layer1').css('background-image', '');      
@@ -108,7 +109,7 @@
                  if (msg.layer2_image !== "images/none") {
                     let imgB = document.createElement("IMG");
                     imgB.src = msg.layer2_image;
-                    $('#layer2').css('background-image', 'url(' + imgB.src + ')');
+                    $('#layer2').css('background-image', 'url('  + staticLocalStorageURL + imgB.src + ')');
                 } else {
 		    $('#layer2').css('background-image', '');      
                 }
@@ -129,8 +130,8 @@
                 
                 
                 if (msg.image !== "none") {
-                    console.log('msg.image:' + msg.image);
-                    $('body').css('background-image', 'url(' + msg.image + ')');
+                    console.log('msg.image:' + staticLocalStorageURL + msg.image);
+                    $('body').css('background-image', 'url(' + staticLocalStorageURL + msg.image + ')');
                 } else {
                     $('body').css('background-image', '');
                 }
