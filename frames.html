@@ -12,7 +12,7 @@
 
             const urlParams = new URLSearchParams(location.search);
             let frameCount = parseInt(urlParams.get('count'));
-            if (!frameCount) frameCount = 4;
+            if (!frameCount) frameCount = 1;
 
             let debugMode = '?debug';
             if (urlParams.get('debug') === 'false') {
@@ -20,7 +20,7 @@
             }
 
             for (let i = frameNr; i < (frameCount + frameNr); i++) {
-                $('<iframe height="200px" width="100%" src="/' + i + debugMode + '" frameBorder="0"></iframe>', {})
+                $('<iframe height="786px" width="100%" src="/' + i + debugMode + '" frameBorder="0"></iframe>', {})
                     .appendTo('#frames');
             }
 
