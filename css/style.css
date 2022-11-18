@@ -18,7 +18,7 @@ body {
 
 #debug {
     display: none;
-    position: fixed;
+    position: relative;
     background-color: white;
     top: 10px;
     margin: 10px;

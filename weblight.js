@@ -79,6 +79,14 @@ app.get('/js/jquery.js', function (req, res) {
     res.sendFile(__dirname + '/js/jquery.js')
 });
 
+app.get('/js/bootstrap.min.js', function (req, res) {
+    res.sendFile(__dirname + '/js/bootstrap.min.js')
+});
+
+app.get('/css/bootstrap.min.css', function (req, res) {
+    res.sendFile(__dirname + '/css/bootstrap.min.css')
+});
+
 app.get('/css/style.css', function (req, res) {
     res.sendFile(__dirname + '/css/style.css')
 });

@@ -4,8 +4,11 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Artnet HeadLighter</title>
-
+	
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link href="./css/style.css" rel="stylesheet">
+    
+        <title>Artnet HeadLighter</title>
     
     	    <style type="text/css">
 	    		@font-face {
@@ -23,6 +26,7 @@
 	    </style>
 	    
     <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script>
         $(function () {
@@ -41,7 +45,7 @@
   
 		       //if (isIOS) document.getElementById('webkit_play').style.display = "flex";
 		  var elem = document.documentElement;
-
+	
 		  /* View in fullscreen */
 		  function openFullscreen() {
 		    if (elem.requestFullscreen) {
