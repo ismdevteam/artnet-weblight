@@ -57,11 +57,11 @@ const srv = artnet.listen(config.artnet.port, function (msg, peer) {
             let deviceId = 0;
             if (index === 30) {
                         updateIMGA(deviceId);
-                        return;
+                        //return;
             }
             if (index === 60) {
                         updateIMGB(deviceId);
-                        return;
+                        //return;
             }
             updateClient(deviceId);
         });
@@ -443,7 +443,9 @@ function updateIMGA(deviceId) {
     let imagePath1 = "none";
     if (layer1imagePath[layerAsrc] === undefined ) imagePath1 = "none";
      else imagePath1 = path.join('images', layer1imagePath[layerAsrc]); 
-    if (!imagePath1) imagePath1 = "images/none";    
+    if (!imagePath1) imagePath1 = "images/none";
+    
+    console.log('imagePath1:' + imagePath1);  
    io.sockets.emit('imga', {layer1_image: imagePath1});
 }
 
@@ -453,6 +455,7 @@ function updateIMGB(deviceId) {
     if (layer2imagePath[layerBsrc] === undefined ) imagePath2 = "none";
      else imagePath2 = path.join('images', layer2imagePath[layerBsrc]); 
     if (!imagePath2) imagePath2 = "images/none";
+    console.log('imagePath2:' + imagePath2);
    io.sockets.emit('imgb', {	layer2_image: imagePath2});
 }
 
@@ -464,20 +467,35 @@ function updateClient(deviceId) {
     const titlesSelector = (buffer[deviceNr + 6] / 2).toFixed(0);
     
     
-    const imageNumber = (buffer[deviceNr + 4] / 10).toFixed(0);
-    
-    let imagePath = imageFiles[parseInt(imageNumber) - 1]; //TODO improve via name matching
-
+    const imageNumber = (buffer[deviceNr + 4] / 2).toFixed(0);    
+    let imagePath = imageFiles[parseInt(imageNumber) - 1]; 
     if (layer1imagePath[imageNumber] === undefined ) imagePath = "none";
-     else imagePath = path.join('images', layer1imagePath[imageNumber]);
-     
+     else imagePath = path.join('images', layer1imagePath[imageNumber]);     
     if (!imagePath) { 
-    	imagePath = "images/none"}
-    //else {
-    //	imagePath = "http://0.0.0.0:2999/lib/artnet-weblight-custom/" + imagePath;
-    //}
-    
+    	imagePath = "images/none"}    
     console.log('imagePath:' + imagePath);
+    
+	
+	    const imageNumber1 = (buffer[deviceNr + 30] / 2).toFixed(0);
+	    
+	    let imagePath1 = imageFiles[parseInt(imageNumber1) - 1]; //TODO improve via name matching
+
+	    if (layer1imagePath[imageNumber1] === undefined ) imagePath1 = "none";
+	     else imagePath1 = path.join('images', layer1imagePath[imageNumber1]);
+	     
+	    if (!imagePath1) { 
+	    	imagePath1 = "images/none"}	    
+	    console.log('imagePath1:' + imagePath1);
+	    
+	    
+	    	    const imageNumber2 = (buffer[deviceNr + 60] / 2).toFixed(0);		    
+		    let imagePath2 = imageFiles[parseInt(imageNumber2) - 1];
+		    if (layer2imagePath[imageNumber2] === undefined ) imagePath2 = "none";
+		     else imagePath2 = path.join('images', layer2imagePath[imageNumber2]);
+		     
+		    if (!imagePath2) { 
+		    	imagePath2 = "images/none"}	    
+		    console.log('imagePath2:' + imagePath2);
    
 
 
@@ -496,11 +514,11 @@ function updateClient(deviceId) {
         subtitles_b: buffer[deviceNr + 9],
         subtitles_rotate: (buffer[deviceNr + 11] * 1.41176470588 + 179).toFixed(0),
         subtitles_zoom: (buffer[deviceNr + 12] / 255 * 2).toFixed(3),
-	//layer1_image: imagePath1,
+	layer1_image: imagePath1,
 	layer1_opacity: (buffer[deviceNr + 36] / 255).toFixed(3),
         layer1_rotate: (buffer[deviceNr + 37] * 1.41176470588 + 179).toFixed(0),
         layer1_zoom: (buffer[deviceNr + 38] / 255 * 2).toFixed(3),
-	//layer2_image: imagePath2,
+	layer2_image: imagePath2,
 	layer2_opacity: (buffer[deviceNr + 66] / 255).toFixed(3),
 	layer2_rotate: (buffer[deviceNr + 67] * 1.41176470588 + 179).toFixed(0),
         layer2_zoom: (buffer[deviceNr + 68] / 255 * 2).toFixed(3),
