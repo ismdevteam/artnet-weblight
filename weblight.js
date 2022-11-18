@@ -35,7 +35,7 @@ const srv = artnet.listen(config.artnet.port, function (msg, peer) {
     // console.log("Physical: " + msg.physical);
     // console.log("Universe: " + msg.universe);
     // console.log("Length: " + msg.length);
-    console.log("Data: " + msg.data);
+    // console.log("Data: " + msg.data);
     // console.log("-----------------");
 
     if (msg.universe !== config.artnet.universe) {
@@ -162,6 +162,7 @@ io.on('connection', function (socket) {
 
 let imageFiles = [];
 glob("images/*", {}, function (er, files) {
+    console.log(er);
     imageFiles = files;
 });
 
@@ -299,14 +300,14 @@ ismdevteam
     
 
 let imagedata = `1.png
-0001.png
+ism.png
 clock.png
 0001.png
-0001.png
-0001.png
-0001.png
-0001.png
-0001.png
+03.jpg
+11.jpg
+APNG-Icos4D.png
+02.jpg
+04.jpg
 0001.png
 0001.png
 0001.png
@@ -463,9 +464,21 @@ function updateClient(deviceId) {
     const titlesSelector = (buffer[deviceNr + 6] / 2).toFixed(0);
     
     
-    const imageNumber = (buffer[deviceNr + 4] / 2).toFixed(0);
+    const imageNumber = (buffer[deviceNr + 4] / 10).toFixed(0);
+    
     let imagePath = imageFiles[parseInt(imageNumber) - 1]; //TODO improve via name matching
-    if (!imagePath) imagePath = "none";
+
+    if (layer1imagePath[imageNumber] === undefined ) imagePath = "none";
+     else imagePath = path.join('images', layer1imagePath[imageNumber]);
+     
+    if (!imagePath) { 
+    	imagePath = "images/none"}
+    //else {
+    //	imagePath = "http://0.0.0.0:2999/lib/artnet-weblight-custom/" + imagePath;
+    //}
+    
+    console.log('imagePath:' + imagePath);
+   
 
 
     io.sockets.emit('dev' + deviceId, {

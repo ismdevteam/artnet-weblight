@@ -31,8 +31,9 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
         $(function () {
-        
-        console.log('init');
+                    var host = window.location.protocol + "//" + window.location.host;
+                    
+                         console.log('init at:' + host);
                     
                     
 	  const iOS_1to12 = /iPad|iPhone|iPod/.test(navigator.platform);
@@ -113,7 +114,7 @@
                 }
             });
                socket.on(deviceId, function (msg) {
-		console.log(msg);
+		//console.log(msg);
                 if (window.location.search.substr(1) === 'debug') {
 		        $('#debug').text(print(msg));
 		        $('#debug').removeClass('d-none').addClass('d-block');
@@ -128,7 +129,8 @@
                 
                 
                 if (msg.image !== "none") {
-                    $('body').css('background-image', 'url(/' + msg.image + ')');
+                    console.log('msg.image:' + msg.image);
+                    $('body').css('background-image', 'url(' + msg.image + ')');
                 } else {
                     $('body').css('background-image', '');
                 }
@@ -140,7 +142,7 @@
                     //$('#subtitles').css('scale', msg.subtitles_zoom);
                     $('#text').css('transform', 'scale(' + msg.subtitles_zoom + ')rotate(' + msg.subtitles_rotate + 'deg)');
                     //$('#text').css('transform', 'rotate(' + msg.subtitles_rotate + 'deg)');
-                    console.log("zoom: " + msg.subtitles_zoom);
+                    //console.log("zoom: " + msg.subtitles_zoom);
                 } else {
                     $("#text").text("");                    
                 }
