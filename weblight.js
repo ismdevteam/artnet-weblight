@@ -298,9 +298,9 @@ pulseturbate.com
     textByLine.unshift("none");
     
 
-let imagedata = `0001.png
+let imagedata = `1.png
 0001.png
-0001.png
+clock.png
 0001.png
 0001.png
 0001.png
