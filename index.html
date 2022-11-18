@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="EN" lang="EN" class="position-static">
 <head>
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable = no">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable = no">
     
     <title>Artnet HeadLighter</title>
 	
@@ -23,7 +23,6 @@
 			body {
 				font-family: 'consolasregular';
 			}
-			@viewport 
 
 	    </style>
 	    
@@ -151,25 +150,25 @@
 </head>
 <body ontouchstart="openFullscreen()" class="position-absolute fs-1">
 
-<div id="panel" class="w-100 h-100 d-inline-block">
-	<div id="debugpanel">
-	      <div id="debug" class="d-none mx-1 mt-1 px-2 position-relative bg-secondary"></div>
-      	      <div id="debuglayer1" class="d-none mx-1 px-2 position-relative bg-secondary">1</div>
-      	      <div id="debuglayer2" class="d-none mx-1 px-2 position-relative bg-secondary">2</div>
-	      <span id="index"></span>
-	      <span id="device"></span>
-	      <span id="alpha"></span>
-	      <span id="red"></span>
-	      <span id="green"></span>
-	      <span id="blue"></span>
-	      <span id="image"></span>
+	<div id="panel" class="w-100 h-100 d-inline-block">
+		<div id="debugpanel">
+		      <div id="debug" class="d-none mx-1 mt-1 px-2 position-relative bg-secondary"></div>
+	      	      <div id="debuglayer1" class="d-none mx-1 px-2 position-relative bg-secondary">1</div>
+	      	      <div id="debuglayer2" class="d-none mx-1 px-2 position-relative bg-secondary">2</div>
+		      <span id="index"></span>
+		      <span id="device"></span>
+		      <span id="alpha"></span>
+		      <span id="red"></span>
+		      <span id="green"></span>
+		      <span id="blue"></span>
+		      <span id="image"></span>
+		</div>
+		<div id="subtitles" class="w-100 h-100 d-flex flex-column justify-content-center align-items-center"><div id="text" style="font-size: 9rem;"></div></div>
+		<div id="layer1">
+			<!-- <video width="320" height="240" loop autoplay muted><source src="images/pearl.mp4" type="video/mp4"></video> -->
+		</div>
+		<div id="layer2"></div>
 	</div>
-	<div id="subtitles" class="w-100 h-100 d-flex flex-column justify-content-center align-items-center"><div id="text" style="font-size: 10rem;"></div></div>
-	<div id="layer1">
-		<!-- <video width="320" height="240" loop autoplay muted><source src="images/pearl.mp4" type="video/mp4"></video> -->
-	</div>
-	<div id="layer2"></div>
-</div>
 	<!--<div id="circlebox"></div>-->
 
 </body>
