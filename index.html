@@ -33,7 +33,10 @@
         $(function () {
                     
                     var localIPv4 = window.location.protocol + "//" + window.location.hostname;
-                    var staticLocalStorageURL = localIPv4 + ":2999" + "/lib/artnet-weblight-custom/";
+                    //var storageEmulatedURI = "file:///storage/emulated/0/";
+                    var staticLocalStorageURL = localIPv4 + ":2999" + "/";
+                    //var staticLocalStorageURL = storageEmulatedURI;
+                    
                     console.log('init at:' + localIPv4);
                     console.log('image url:' + staticLocalStorageURL);
                     
@@ -96,7 +99,7 @@
             
             socket.on('imga', function (msg) {            
             console.log('imga msg:', msg);
-                if (msg.layer1_image !== "images/none") {
+                if (msg.layer1_image !== "none") {
                     let imgA = document.createElement("IMG");
                     let imgA_url = staticLocalStorageURL + msg.layer1_image;
                     console.log('imga path:' + imgA_url);
@@ -109,7 +112,7 @@
                 }
             });
             socket.on('imgb', function (msg) {
-                 if (msg.layer2_image !== "images/none") {
+                 if (msg.layer2_image !== "none") {
                     let imgB = document.createElement("IMG");
                     imgB.src = staticLocalStorageURL + msg.layer2_image;
                     $('#layer2').css('background-image', 'url(' + imgB.src + ')');
@@ -179,7 +182,6 @@
 		<div id="subtitles" class="w-100 h-100 d-flex flex-column justify-content-center align-items-center"><div id="text" class="" style="font-size: 9rem;"></div></div>
 		<div id="layer1" class="w-100 h-100 d-flex flex-column justify-content-center align-items-center m-0 p-0 position-absolute" style="background-color:transparent; background-repeat: no-repeat;background-position: center center;background-size: contain;">
 			<!-- <video width="320" height="240" loop autoplay muted><source src="images/pearl.mp4" type="video/mp4"></video> -->
-			<!--<img id="image1" src="http://192.168.1.67:2999/lib/artnet-weblight-custom/images/none" class="img-responsive rounded-3" style="width: 100%; height: 100%;">-->
 		</div>
 		<div id="layer2" class="w-100 h-100 d-flex flex-column justify-content-center align-items-center m-0 p-0 position-absolute" style="background-color:transparent; background-repeat: no-repeat;background-position: center center;background-size: contain;"></div>
 	</div>

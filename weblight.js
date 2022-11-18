@@ -300,19 +300,19 @@ ismdevteam
     
 
 let imagedata = `1.png
-ism.png
-clock.png
-0001.png
-03.jpg
-11.jpg
-APNG-Icos4D.png
-02.jpg
-04.jpg
-0001.png
-0001.png
-0001.png
-0001.png
-0001.png
+Download/images/ism.png
+Download/images/clock.png
+Download/images/0001.png
+Download/images/03.jpg
+Download/images/11.jpg
+Download/images/APNG-Icos4D.png
+Download/images/02.jpg
+Download/images/04.jpg
+Download/images/0001.png
+Download/images/0001.png
+Download/images/0001.png
+DCIM/Camera/IMG_20221119_012202.jpg
+DCIM/Camera/IMG_20221119_012202.jpg
 0001.png
 0001.png
 0001.png
@@ -442,7 +442,7 @@ function updateIMGA(deviceId) {
     const layerAsrc = (buffer[deviceId + 30] / 2).toFixed(0); //layer1 img src   
     let imagePath1 = "none";
     if (layer1imagePath[layerAsrc] === undefined ) imagePath1 = "none";
-     else imagePath1 = path.join('images', layer1imagePath[layerAsrc]); 
+     else imagePath1 = path.join('', layer1imagePath[layerAsrc]); 
     if (!imagePath1) imagePath1 = "images/none";
     
     console.log('imagePath1:' + imagePath1);  
@@ -453,7 +453,7 @@ function updateIMGB(deviceId) {
     const layerBsrc = (buffer[deviceId + 60] / 2).toFixed(0); //layer2 img src
     let imagePath2 = "none";
     if (layer2imagePath[layerBsrc] === undefined ) imagePath2 = "none";
-     else imagePath2 = path.join('images', layer2imagePath[layerBsrc]); 
+     else imagePath2 = path.join('', layer2imagePath[layerBsrc]); 
     if (!imagePath2) imagePath2 = "images/none";
     console.log('imagePath2:' + imagePath2);
    io.sockets.emit('imgb', {	layer2_image: imagePath2});
@@ -470,7 +470,7 @@ function updateClient(deviceId) {
     const imageNumber = (buffer[deviceNr + 4] / 2).toFixed(0);    
     let imagePath = imageFiles[parseInt(imageNumber) - 1]; 
     if (layer1imagePath[imageNumber] === undefined ) imagePath = "none";
-     else imagePath = path.join('images', layer1imagePath[imageNumber]);     
+     else imagePath = path.join('', layer1imagePath[imageNumber]);     
     if (!imagePath) { 
     	imagePath = "images/none"}    
     console.log('imagePath:' + imagePath);
@@ -481,7 +481,7 @@ function updateClient(deviceId) {
 	    let imagePath1 = imageFiles[parseInt(imageNumber1) - 1]; //TODO improve via name matching
 
 	    if (layer1imagePath[imageNumber1] === undefined ) imagePath1 = "none";
-	     else imagePath1 = path.join('images', layer1imagePath[imageNumber1]);
+	     else imagePath1 = path.join('', layer1imagePath[imageNumber1]);
 	     
 	    if (!imagePath1) { 
 	    	imagePath1 = "images/none"}	    
@@ -491,7 +491,7 @@ function updateClient(deviceId) {
 	    	    const imageNumber2 = (buffer[deviceNr + 60] / 2).toFixed(0);		    
 		    let imagePath2 = imageFiles[parseInt(imageNumber2) - 1];
 		    if (layer2imagePath[imageNumber2] === undefined ) imagePath2 = "none";
-		     else imagePath2 = path.join('images', layer2imagePath[imageNumber2]);
+		     else imagePath2 = path.join('', layer2imagePath[imageNumber2]);
 		     
 		    if (!imagePath2) { 
 		    	imagePath2 = "images/none"}	    
