@@ -90,7 +90,7 @@
                 if (msg.layer1_image !== "images/none") {
                     let imgA = document.createElement("IMG");
                     imgA.src = msg.layer1_image;
-                    $('#layer1').css('background-image', 'url(' + imgA.src + ')');
+                    $('#layer1').css('background-image', 'url(/' + imgA.src + ')');
                 } else {
 		    $('#layer1').css('background-image', '');      
                 }
@@ -99,7 +99,7 @@
                  if (msg.layer2_image !== "images/none") {
                     let imgB = document.createElement("IMG");
                     imgB.src = msg.layer2_image;
-                    $('#layer2').css('background-image', 'url(' + imgB.src + ')');
+                    $('#layer2').css('background-image', 'url(/' + imgB.src + ')');
                 } else {
 		    $('#layer2').css('background-image', '');      
                 }
@@ -153,7 +153,6 @@
 	</div>
 	<div id="subtitles"><h1 id="text"></h1></div>
 	<div id="layer1">
-		<img id="layer1img" src="images/0001.png">
 		<!-- <video width="320" height="240" loop autoplay muted><source src="images/pearl.mp4" type="video/mp4"></video> -->
 	</div>
 	<div id="layer2"></div>
