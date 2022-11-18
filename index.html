@@ -1,8 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="EN" lang="EN">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="EN" lang="EN" class="position-static">
 <head>
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable = no">
+    
     <title>Artnet HeadLighter</title>
 	
     <link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -22,6 +23,7 @@
 			body {
 				font-family: 'consolasregular';
 			}
+			@viewport 
 
 	    </style>
 	    
@@ -42,6 +44,8 @@
     return audio.volume === 1;
   };
   const isIOS = !window.MSStream && (iOS_1to12 || iOS13_iPad || iOS1to12quirk());
+  
+  if (isIOS) $('body').css('margin-top', 'auto');
   
 		       //if (isIOS) document.getElementById('webkit_play').style.display = "flex";
 		  var elem = document.documentElement;
@@ -84,9 +88,9 @@
             const print = function (input) {
                 return "Device " + deviceNr + "| Alpha " + input.a + " Red: " + input.r + " Green: " + input.g + " Blue: " + input.b + 
                 	//" Border: " + input.border + " Blur: " + input.blur + 
-	               	" Subtitles: " + input.text + 
-                	" Layer1: " + input.layer1_image + " Layer1 opacity: " + input.layer1_opacity +
-                	" Layer2: " + input.layer2_image + " Layer2 opacity: " + input.layer2_opacity;
+	               	" Subtitles: " + input.text + " Layer1 opacity: " + input.layer1_opacity + " Layer2 opacity: " + input.layer2_opacity;
+                	//" Layer1: " + input.layer1_image + " Layer1 opacity: " + input.layer1_opacity +
+                	//" Layer2: " + input.layer2_image + " Layer2 opacity: " + input.layer2_opacity;
             };
             
             socket.on('imga', function (msg) {            
@@ -113,8 +117,10 @@
 		console.log(msg);
                 if (window.location.search.substr(1) === 'debug') {
 		        $('#debug').text(print(msg));
-		        $('#debug').css('display', 'inline');
-      		        $('#debugpanel').css('display', 'inline');
+		        $('#debug').removeClass('d-none').addClass('d-block');
+		        $('#debuglayer1').removeClass('d-none').addClass('d-block');
+       		        $('#debuglayer2').removeClass('d-none').addClass('d-block');
+      		        $('#debugpanel').css('display', 'block');
 		}
 
                 $('html').css('background-color', 'rgba(' + '0' + ', ' + '0' + ', ' + '0' + ', ' + '1' + ')');
@@ -143,11 +149,13 @@
         });
     </script>
 </head>
-<body ontouchstart="openFullscreen()">
+<body ontouchstart="openFullscreen()" class="position-absolute">
 
 <div id="panel">
 	<div id="debugpanel">
-	      <span id="debug"></span>
+	      <div id="debug" class="d-none mx-1 mt-1 px-2 position-relative bg-secondary"></div>
+      	      <div id="debuglayer1" class="d-none mx-1 px-2 position-relative bg-secondary">1</div>
+      	      <div id="debuglayer2" class="d-none mx-1 px-2 position-relative bg-secondary">2</div>
 	      <span id="index"></span>
 	      <span id="device"></span>
 	      <span id="alpha"></span>
