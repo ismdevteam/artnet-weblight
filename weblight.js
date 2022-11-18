@@ -9,8 +9,8 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const glob = require("glob");
 
-const fs = require('fs');
-const path = require('path');
+//const fs = require('fs');
+//const path = require('path');
 
 
 const config = {};
@@ -130,12 +130,17 @@ app.get('/', function (req, res) {
 app.get('/:id', function (req, res) {
     const channelId = req.params.id * 10;
     const channel = channelId + 1;
-
+/*
     if (channel + 10 > 512) {
         res.sendStatus(416);
         return;
     }
-
+*/
+    if (channel > 1) {
+        res.sendStatus(416);
+        return;
+    }
+    
     res.sendFile(__dirname + '/index.html');
 
     updateClient(req.params.id);
@@ -153,22 +158,276 @@ glob("images/*", {}, function (er, files) {
 });
 
 let textByLine = [128];
-fs.readFile('config/0/subtitles.conf', 'utf8', function(err, data){
+let data = `0001 dj intro
+pulse122
+pills
+TolmachoF
+Cy4ka
+Cy4ka Даёт
+Cy4ka Даёт в попку
+pulse125
+pulseturbate.com
+0010 synth fx 1> + add openhh
+0011 drop 4x4
+0012 +add main openshaker hh
+0013 bass fx1 on 1 beat
+0014 dj
+0015 synth fx 3>
+0016 +hats layer
+0017 drop 4x4
+0018 synth fx (bong) as crash
+0019 synth bass fx1 on 1 beat syncope
+0020 psyho synth layer cutoff<
+0021 synth arp
+0022 bitch
+0023 drop4x4+synth bass fx2<
+0024 drop with synth fx (bong) as crash + noisefx<
+0025 drop with deep shaman bong
+0026 drop dj arp (psyho rhodes) cutoff close>
+0027 drop minimal sounds left
+0028 drop theme begin from deep
+0029 drop waiting theme
+0030 drop theme
+0031 funky
+0032 drop noisefx< bass fx<
+0033 drop as whomadewho variation
+0034 drop theme
+0035 drop out< uplifting bass&pad side-ch
+0036 main part + theme (no hatz just work bd+clap)
+0037 main part theme
+0038 lil 4x4 drop + noisefx<
+0039 main part + add openhh
+0040 drop with hatz&perc and clap, but no kick
+0041 drop with theme
+0042 main part theme full drums
+0043 main part theme full drums
+0044 lil 4x4 drop + theme
+0045 drop out + noisefx<
+0046 main part theme coda
+0047 main part theme coda
+0048 main part theme coda var2
+0049 main part theme outro with noisefx<
+0050 final drop with side-ch pads perc hatz
+0051 final drop with deeppadfx
+0052 bass fx1<
+0053 dj outro
+0054 kick cut
+0055 fin
+0056
+0057
+0058
+0059
+0060
+0061
+0062
+0063
+0064 PNG_sequence
+0065 LFO:SYNCtoHOST
+0066 LFO:SYNCtoHOST
+0067 TODO:NOISEFX1 #51 217.1.1
+0068
+0069
+0070
+0071
+0072
+0073
+0074
+0075
+0076
+0077
+0078
+0079
+0080
+0081
+0082
+0083
+0084
+0085
+0086
+0087
+0088
+0089
+0090
+0091
+0092
+0093
+0094
+0095
+0096
+0097
+0098
+0099 Koкс
+0100 Дождь
+0101
+0102
+0103
+0104
+0105
+0106
+0107
+0108
+0109
+0110
+0111
+0112
+0113
+0114
+0115
+0116
+0117
+0118
+0119
+0120
+0121
+0122
+0123
+0124
+0125
+0126
+0127`;
+
     textByLine = data.split("\n");
     textByLine.unshift("none");
-});
+    
+
+let imagedata = `ballmagic.png
+test15FPS.png
+skyfluids.gif
+fLuids.png
+skyocean_ballmagic.gif
+skyocean_ballmagic_a.png
+APNG-Icos4D.png
+clock.png
+oblivion_lp.png
+luna.png
+ytune.png
+cmatrix.png
+0013.png
+0014.png
+0015.png
+0016.png
+0017.png
+0018.png
+0019.png
+0020.png
+0021.png
+0022.png
+0023.png
+0024.png
+0025.png
+0026.png
+0027.png
+0028.png
+0029.png
+0030.png
+0031.png
+0032.png
+0033.png
+0034.png
+0035.png
+0036.png
+0037.png
+0038.png
+0039.png
+0040.png
+0041.png
+0042.png
+0043.png
+0044.png
+0045.png
+0046.png
+0047.png
+0048.png
+0049.png
+0050.png
+0051.png
+0052.png
+0053.png
+0054.png
+0055.png
+0056.png
+0057.png
+0058.png
+0059.png
+0060.png
+0061.png
+0062.png
+0063.png
+0064.png
+0065.png
+0066.png
+0067.png
+0068.png
+0069.png
+0070.png
+0071.png
+0072.png
+0073.png
+0074.png
+0075.png
+0076.png
+0077.png
+0078.png
+0079.png
+0080.png
+0081.png
+0082.png
+0083.png
+0084.png
+0085.png
+0086.png
+0087.png
+0088.png
+0089.png
+0090.png
+0091.png
+0092.png
+0093.png
+0094.png
+0095.png
+0096.png
+0097.png
+0098.png
+0099.png
+0100.png
+0101.png
+0102.png
+0103.png
+0104.png
+0105.png
+0106.png
+0107.png
+0108.png
+0109.png
+0110.png
+0111.png
+0112.png
+0113.png
+0114.png
+0115.png
+0116.png
+0117.png
+0118.png
+0119.png
+0120.png
+0121.png
+0122.png
+0123.png
+0124.png
+0125.png
+0126.png
+0127.png`;
 
 let layer1imagePath = [128];
-fs.readFile('config/0/layer.conf', 'utf8', function(err, data){
-    layer1imagePath = data.split("\n");
+
+    layer1imagePath = imagedata.split("\n");
     layer1imagePath.unshift('none');
-});
 
 let layer2imagePath = [128];
-fs.readFile('config/0/layer.conf', 'utf8', function(err, data){
-    layer2imagePath = data.split("\n");
+
+    layer2imagePath = imagedata.split("\n");
     layer2imagePath.unshift('none');
-});
+
 
 function updateIMGA(deviceId) {
     const layerAsrc = (buffer[deviceId + 30] / 2).toFixed(0); //layer1 img src   
@@ -219,26 +478,6 @@ function updateClient(deviceId) {
         layer2_zoom: (buffer[deviceNr + 68] / 255 * 2).toFixed(3),
     });
 }
-
-
-function updateClient_bkp(deviceId) {
-    const deviceNr = deviceId * 10;
-
-    const imageNumber = (buffer[deviceNr + 6] / 10).toFixed(0);
-    let imagePath = imageFiles[parseInt(imageNumber) - 1]; //TODO improve via name matching
-    if (!imagePath) imagePath = "none";
-
-    io.sockets.emit('dev' + deviceId, {
-        r: buffer[deviceNr + 1],
-        g: buffer[deviceNr + 2],
-        b: buffer[deviceNr + 3],
-        a: (buffer[deviceNr + 0] / 255).toFixed(3),
-        border: buffer[deviceNr + 4],
-        blur: buffer[deviceNr + 5],
-        image: imagePath
-    });
-}
-
 
 function updateAllClients() {
     for (let i = 0; i <= 50; i++) {
