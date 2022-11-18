@@ -129,7 +129,7 @@
                                 
                 if (msg.text !== "none") {       
                     $("#text").text(msg.text);
-                    $("#text").css('font-size', '100px');
+                    //$("#text").css('font-size', '100px');
                     $("#text").css('color', 'rgba(' + msg.subtitles_r + ', ' + msg.subtitles_g + ', ' + msg.subtitles_b + ', ' + msg.subtitles_a + ')');
                     //$('#subtitles').css('scale', msg.subtitles_zoom);
                     $('#text').css('transform', 'scale(' + msg.subtitles_zoom + ')rotate(' + msg.subtitles_rotate + 'deg)');
@@ -149,9 +149,9 @@
         });
     </script>
 </head>
-<body ontouchstart="openFullscreen()" class="position-absolute">
+<body ontouchstart="openFullscreen()" class="position-absolute fs-1">
 
-<div id="panel">
+<div id="panel" class="w-100 h-100 d-inline-block">
 	<div id="debugpanel">
 	      <div id="debug" class="d-none mx-1 mt-1 px-2 position-relative bg-secondary"></div>
       	      <div id="debuglayer1" class="d-none mx-1 px-2 position-relative bg-secondary">1</div>
@@ -164,7 +164,7 @@
 	      <span id="blue"></span>
 	      <span id="image"></span>
 	</div>
-	<div id="subtitles"><h1 id="text"></h1></div>
+	<div id="subtitles" class="w-100 h-100 d-flex flex-column justify-content-center align-items-center"><div id="text" style="font-size: 10rem;"></div></div>
 	<div id="layer1">
 		<!-- <video width="320" height="240" loop autoplay muted><source src="images/pearl.mp4" type="video/mp4"></video> -->
 	</div>
