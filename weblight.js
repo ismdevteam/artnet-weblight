@@ -9,9 +9,9 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const glob = require("glob");
 
-//const fs = require('fs');
-const path = require('path');
+const fs = require('fs');
 
+const path = require('path');
 
 const config = {};
 config.artnet = {};
@@ -298,6 +298,22 @@ ismdevteam
     textByLine = data.split("\n");
     textByLine.unshift("none");
     
+    
+let configJSON = {};    
+fs.readFile('/storage/emulated/0/.headlighter-config.json', 'utf8', function(err, data){
+	console.log('config:' + data);
+	  if (!err) {
+	    var jsonArr = JSON.parse(data);
+	    console.log(jsonArr);
+	    console.log("group id:" + jsonArr[0].node.image.uri);
+	    jsonArr.forEach(element => {
+	    	console.log(element.node.image.uri);
+	    });
+	  }
+	    //layer1imagePath = data.split("\n");
+    //layer1imagePath.unshift('none');
+});
+    
 
 let imagedata = `1.png
 Download/images/ism.png
@@ -473,7 +489,7 @@ function updateClient(deviceId) {
      else imagePath = path.join('', layer1imagePath[imageNumber]);     
     if (!imagePath) { 
     	imagePath = "images/none"}    
-    console.log('imagePath:' + imagePath);
+    //console.log('imagePath:' + imagePath);
     
 	
 	    const imageNumber1 = (buffer[deviceNr + 30] / 2).toFixed(0);
@@ -485,7 +501,7 @@ function updateClient(deviceId) {
 	     
 	    if (!imagePath1) { 
 	    	imagePath1 = "images/none"}	    
-	    console.log('imagePath1:' + imagePath1);
+	    //console.log('imagePath1:' + imagePath1);
 	    
 	    
 	    	    const imageNumber2 = (buffer[deviceNr + 60] / 2).toFixed(0);		    
@@ -495,7 +511,7 @@ function updateClient(deviceId) {
 		     
 		    if (!imagePath2) { 
 		    	imagePath2 = "images/none"}	    
-		    console.log('imagePath2:' + imagePath2);
+		    //console.log('imagePath2:' + imagePath2);
    
 
 
